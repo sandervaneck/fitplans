@@ -8,7 +8,7 @@ import { MealOutput, TrainingOutput } from "../components/emptyForms";
 
 export const callTrainingGpt = async (
   prompt: string,
-  action: (a: any) => void,
+  action: (a: TrainingScheduleAnswerType) => void,
   setIsLoading: (a: boolean) => void
 ) => {
   setIsLoading(true); // Start loading
@@ -43,7 +43,7 @@ export const callTrainingGpt = async (
 
 export const callGptMeals = async (
   prompt: string,
-  action: (a: any) => void,
+  action: (a: MealScheduleAnswerType) => void,
   setIsLoading: (a: boolean) => void
 ) => {
   setIsLoading(true); // Start loading

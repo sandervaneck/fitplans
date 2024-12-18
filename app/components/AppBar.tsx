@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Container } from "@mui/material";
+import Link from "next/link";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,7 +56,7 @@ export const SearchAppBar = () => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar>
-            <a href="/">
+            <Link href="/">
               <Typography
                 variant="h6"
                 noWrap
@@ -64,7 +65,7 @@ export const SearchAppBar = () => {
               >
                 FitPlanner
               </Typography>
-            </a>
+            </Link>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

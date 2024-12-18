@@ -19,13 +19,13 @@ interface RequestTrainingPlanFormProps {
 
 export const RequestTrainingPlanForm: React.FC<
   RequestTrainingPlanFormProps
-> = ({ form, setForm, isMobile, answer, setAnswer }) => {
+> = ({ form, setForm, isMobile, setAnswer }) => {
   const [loading, setLoading] = useState(false);
   const getMyTrainings = (form: TrainingFormType) => {
     const prompt = getTrainingPrompt(form);
     callTrainingGpt(
       prompt,
-      (a: any) => {
+      (a: TrainingScheduleAnswerType) => {
         setAnswer(a);
       },
       (b: boolean) => setLoading(b)

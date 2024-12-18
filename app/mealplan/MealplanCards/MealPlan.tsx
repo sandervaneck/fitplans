@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { MealsPerWeek, Meal } from "@/app/types/types";
 
 // Type for the entire meal plan

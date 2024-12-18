@@ -1,5 +1,6 @@
 "use client";
 import { InputAdornment, InputLabel, TextField } from "@mui/material";
+import { CSSProperties } from "@mui/material/styles/createTypography";
 
 interface FormFieldProps {
   required?: boolean;
@@ -10,7 +11,7 @@ interface FormFieldProps {
   placeholder?: string;
   endAdornment?: string;
   startAdornment?: string;
-  style?: any;
+  style?: CSSProperties | undefined;
 }
 
 export const FormField: React.FC<FormFieldProps> = (props) => {

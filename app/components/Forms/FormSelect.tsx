@@ -8,6 +8,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
+import { CSSProperties } from "@mui/material/styles/createTypography";
 import React from "react";
 
 interface FormSelectProps {
@@ -66,7 +67,7 @@ export const FormSelectMultiple = ({
   label,
   style,
 }: {
-  style?: any;
+  style?: CSSProperties | undefined;
   value: string[];
   options: string[];
   handleChange: (e: SelectChangeEvent<string[]>) => void;

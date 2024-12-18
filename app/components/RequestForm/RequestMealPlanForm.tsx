@@ -25,7 +25,7 @@ export const RequestMealPlanForm: React.FC<RequestMealPlanFormProps> = ({
     const prompt = getMealPrompt(form);
     callGptMeals(
       prompt,
-      (a: any) => {
+      (a: MealScheduleAnswerType) => {
         setAnswer(a);
       },
       (b: boolean) => setLoading(b)
