@@ -1,8 +1,12 @@
 import { FC } from "react";
 import { TrainingPlanRenderdPage } from "./components/TrainingPlanRenderdPage";
-import { MealPlanPageProps } from "@/app/mealplan/[clientSessionId]/components/MealPlanRenderdPage";
 
-const TrainingPlanPage: FC<MealPlanPageProps> = async ({ clientSessionId }) => {
+interface TrainingPlanPageProps {
+  clientSessionId: string;
+}
+const TrainingPlanPage: FC<TrainingPlanPageProps> = async ({
+  clientSessionId,
+}) => {
   return (
     <div>
       <TrainingPlanRenderdPage clientSessionId={clientSessionId} />
