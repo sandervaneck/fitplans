@@ -5,7 +5,7 @@ import { MealsPerWeek } from "@/app/types/types";
 import { MealPlans } from "../../MealplanCards";
 import { SearchAppBar } from "@/app/components/AppBar";
 
-interface MealPlanPageProps {
+export interface MealPlanPageProps {
   clientSessionId: string;
 }
 

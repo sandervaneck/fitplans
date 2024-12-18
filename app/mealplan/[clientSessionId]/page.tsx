@@ -1,17 +1,12 @@
 // app/mealplan/[clientSessionId]/page.tsx
 
 import { FC } from "react";
-import { MealPlanRenderdPage } from "./components/MealPlanRenderdPage";
+import {
+  MealPlanPageProps,
+  MealPlanRenderdPage,
+} from "./components/MealPlanRenderdPage";
 
-interface MealPlanPageProps {
-  params: {
-    clientSessionId: string;
-  };
-}
-
-const MealPlanPage: FC<MealPlanPageProps> = ({ params }) => {
-  const { clientSessionId } = params; // Access params directly without await
-
+const MealPlanPage: FC<MealPlanPageProps> = ({ clientSessionId }) => {
   return (
     <div>
       <MealPlanRenderdPage clientSessionId={clientSessionId} />
