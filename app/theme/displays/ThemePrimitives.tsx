@@ -6,7 +6,9 @@ declare module "@mui/material/Paper" {
     highlighted: true;
   }
 }
-
+export const shape = {
+  borderRadius: 8, // Customize this value as needed
+};
 // Palette Extensions
 declare module "@mui/material/styles/createPalette" {
   interface ColorRange {
@@ -137,3 +139,45 @@ export const getDesignTokens = (mode: PaletteMode) => {
     shadows: customShadows,
   };
 };
+
+export const colorSchemes = {
+  light: {
+    palette: {
+      primary: {
+        light: "hsl(210, 100%, 92%)",
+        main: "hsl(210, 98%, 48%)",
+        dark: "hsl(210, 100%, 35%)",
+        contrastText: "hsl(210, 100%, 95%)",
+      },
+    },
+  },
+  dark: {
+    palette: {
+      primary: {
+        light: "hsl(210, 100%, 80%)",
+        main: "hsl(210, 98%, 42%)",
+        dark: "hsl(210, 100%, 16%)",
+        contrastText: "hsl(210, 100%, 95%)",
+      },
+    },
+  },
+};
+
+export const typography = {
+  fontFamily: "Inter, sans-serif",
+  h1: {
+    fontSize: "48px",
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+  h2: {
+    fontSize: "36px",
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+};
+
+export const shadows = [
+  "var(--template-palette-baseShadow)",
+  ...defaultTheme.shadows.slice(2),
+];
