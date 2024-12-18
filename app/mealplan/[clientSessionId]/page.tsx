@@ -1,12 +1,17 @@
 // app/mealplan/[clientSessionId]/page.tsx
 
-import { FC } from "react";
 import { MealPlanRenderdPage } from "./components/MealPlanRenderdPage";
 
-interface MealPlanPageProps {
-  clientSessionId: string;
+interface PageProps {
+  params: {
+    clientSessionId: string;
+  };
 }
-const MealPlanPage: FC<MealPlanPageProps> = ({ clientSessionId }) => {
+
+// Next.js page component for the route
+const MealPlanPage = ({ params }: PageProps) => {
+  const { clientSessionId } = params;
+
   return (
     <div>
       <MealPlanRenderdPage clientSessionId={clientSessionId} />
