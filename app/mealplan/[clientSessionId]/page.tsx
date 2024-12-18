@@ -1,11 +1,11 @@
 // app/mealplan/[clientSessionId]/page.tsx
 
 import { FC } from "react";
-import {
-  MealPlanPageProps,
-  MealPlanRenderdPage,
-} from "./components/MealPlanRenderdPage";
+import { MealPlanRenderdPage } from "./components/MealPlanRenderdPage";
 
+interface MealPlanPageProps {
+  clientSessionId: string;
+}
 const MealPlanPage: FC<MealPlanPageProps> = ({ clientSessionId }) => {
   return (
     <div>
