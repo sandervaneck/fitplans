@@ -4,7 +4,7 @@ import { typographyClasses } from "@mui/material/Typography";
 import { buttonBaseClasses } from "@mui/material/ButtonBase";
 import { chipClasses } from "@mui/material/Chip";
 import { iconButtonClasses } from "@mui/material/IconButton";
-import { gray, green, red } from "./ThemePrimitives";
+import { colors } from "./ThemePrimitives";
 
 /* eslint-disable import/prefer-default-export */
 export const dataDisplayCustomizations: Components<Theme> = {
@@ -103,22 +103,22 @@ export const dataDisplayCustomizations: Components<Theme> = {
               color: "default",
             },
             style: {
-              borderColor: gray[200],
-              backgroundColor: gray[100],
+              borderColor: colors.gray[200],
+              backgroundColor: colors.gray[100],
               [`& .${chipClasses.label}`]: {
-                color: gray[500],
+                color: colors.gray[500],
               },
               [`& .${chipClasses.icon}`]: {
-                color: gray[500],
+                color: colors.gray[500],
               },
               ...theme.applyStyles("dark", {
-                borderColor: gray[700],
-                backgroundColor: gray[800],
+                borderColor: colors.gray[700],
+                backgroundColor: colors.gray[800],
                 [`& .${chipClasses.label}`]: {
-                  color: gray[300],
+                  color: colors.gray[300],
                 },
                 [`& .${chipClasses.icon}`]: {
-                  color: gray[300],
+                  color: colors.gray[300],
                 },
               }),
             },
@@ -128,22 +128,22 @@ export const dataDisplayCustomizations: Components<Theme> = {
               color: "success",
             },
             style: {
-              borderColor: green[200],
-              backgroundColor: green[50],
+              borderColor: colors.green[200],
+              backgroundColor: colors.green[50],
               [`& .${chipClasses.label}`]: {
-                color: green[500],
+                color: colors.green[500],
               },
               [`& .${chipClasses.icon}`]: {
-                color: green[500],
+                color: colors.green[500],
               },
               ...theme.applyStyles("dark", {
-                borderColor: green[800],
-                backgroundColor: green[900],
+                borderColor: colors.green[800],
+                backgroundColor: colors.green[900],
                 [`& .${chipClasses.label}`]: {
-                  color: green[300],
+                  color: colors.green[300],
                 },
                 [`& .${chipClasses.icon}`]: {
-                  color: green[300],
+                  color: colors.green[300],
                 },
               }),
             },
@@ -153,22 +153,22 @@ export const dataDisplayCustomizations: Components<Theme> = {
               color: "error",
             },
             style: {
-              borderColor: red[100],
-              backgroundColor: red[50],
+              borderColor: colors.red[100],
+              backgroundColor: colors.red[50],
               [`& .${chipClasses.label}`]: {
-                color: red[500],
+                color: colors.red[500],
               },
               [`& .${chipClasses.icon}`]: {
-                color: red[500],
+                color: colors.red[500],
               },
               ...theme.applyStyles("dark", {
-                borderColor: red[800],
-                backgroundColor: red[900],
+                borderColor: colors.red[800],
+                backgroundColor: colors.red[900],
                 [`& .${chipClasses.label}`]: {
-                  color: red[200],
+                  color: colors.red[200],
                 },
                 [`& .${chipClasses.icon}`]: {
-                  color: red[300],
+                  color: colors.red[300],
                 },
               }),
             },
