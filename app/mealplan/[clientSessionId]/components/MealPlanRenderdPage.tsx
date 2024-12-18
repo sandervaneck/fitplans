@@ -20,13 +20,11 @@ export const MealPlanRenderdPage: FC<MealPlanPageProps> = ({
   useEffect(() => {
     if (typeof window !== "undefined") {
       const result = localStorage.getItem("mealPlanAnswer");
-      console.log(localStorage);
       if (result) {
         setMealPlan(JSON.parse(result)); // Update the state with the meal plan data
       }
     }
   }, []); // This runs once after the component mounts (client-side)
-  console.log(localStorage.getItem("mealPlanAnswer"));
   // Render the page with a loading state initially, then the actual data when it's available
   if (mealPlan === null) {
     return <div>Loading meal plan...</div>;

@@ -189,37 +189,6 @@ export const DayRow = ({ meal }: { meal: Meal }) => {
       <hr
         style={{ margin: "4px 0", border: "none", borderTop: "1px solid #ddd" }}
       />
-
-      {/* Instructions Dialog */}
-      {/* <InstructionsDialog
-        open={open}
-        setOpen={setOpen}
-        instructions={meal.instructions}
-      /> */}
     </div>
-  );
-};
-
-export const InstructionsDialog = ({
-  open,
-  setOpen,
-  instructions,
-}: {
-  open: boolean;
-  setOpen: (b: boolean) => void;
-  instructions: string[];
-}) => {
-  return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Instructions</DialogTitle>
-      <DialogContent>
-        {instructions.map((i, index) => (
-          <li key={index}>{i}</li>
-        ))}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => setOpen(false)}>Close</Button>
-      </DialogActions>
-    </Dialog>
   );
 };

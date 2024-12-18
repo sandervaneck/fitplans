@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Account, AccountInput } from "../graphql/schema";
 import { MealFormType, TrainingFormType } from "../types/types";
 
 export const TrainingOutput = z.object({
@@ -131,31 +130,4 @@ export const emptyMealInputForm: MealFormType = {
     exclusions: [""],
     favoritefoods: [""],
   },
-};
-export const emptyAccount: Account = {
-  __typename: "Account",
-  numberoftrainingsaweek: "",
-  email: "",
-  password: "",
-  foodrestrictions: [""],
-  username: "",
-  accesstoken: "",
-  id: "",
-  avatar: "",
-  birthdate: "01/01/1900",
-  trainingnumber: "",
-  numberofmealsaday: undefined,
-};
-
-export const emptyAccountInput: AccountInput = {
-  email: "",
-  password: "",
-  foodrestrictions: [""],
-  username: "",
-  accesstoken: "",
-  id: "",
-  avatar: "",
-  birthdate: "01/01/1900",
-  trainingnumber: "",
-  numberofmealsaday: undefined,
 };

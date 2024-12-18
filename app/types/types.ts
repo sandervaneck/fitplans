@@ -44,27 +44,6 @@ export type TrainingType = {
   excercises: string[];
 };
 
-export type ExcerciseType = {
-  excercise: string;
-  reps: number;
-  sets: number;
-};
-export enum WorkoutType {
-  WEIGHTS = "WEIGHTS",
-  RUNNING = "RUNNING",
-  BIKING = "BIKING",
-  PADEL = "PADEL",
-  TENNIS = "TENNIS",
-  BOULDERING = "BOULDERING",
-  FOOTBALL = "FOOTBALL",
-  HIKING = "HIKING",
-  WALKING = "WALKING",
-  CALISTHENICS = "CALISTHENICS",
-  GYMNASTICS = "GYMNASTICS",
-  TRACKANDFIELD = "TRACKANDFIELD",
-  SWIMMING = "SWIMMING",
-}
-
 export type TrainingFormType = {
   age: number;
   weigth: number;
@@ -87,10 +66,3 @@ export type MealFormType = {
     favoritefoods: string[];
   };
 };
-
-export enum GoalType {
-  WEIGTHLOSS = "WEIGTHLOSS",
-  MUSCLEGAIN = "MUSCLEGAIN",
-  HYROXPREP = "HYROXPREP",
-  MAINTENANCE = "MAINTENANCE",
-}

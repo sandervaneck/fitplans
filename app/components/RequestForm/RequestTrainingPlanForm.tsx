@@ -1,11 +1,5 @@
 "use client";
-import {
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import {
   TrainingFormType,
   TrainingScheduleAnswerType,

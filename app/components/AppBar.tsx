@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Container } from "@mui/material";
-import { useState } from "react";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,8 +50,6 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const SearchAppBar = () => {
-  const [openDialog, setopenDialog] = useState(false);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

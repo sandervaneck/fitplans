@@ -1,15 +1,9 @@
 "use client";
 import { useMediaQuery, Stack, Card } from "@mui/material";
 import { useState } from "react";
-import {
-  emptyMealInputForm,
-  emptyTrainingForm,
-} from "../components/emptyForms";
+import { emptyTrainingForm } from "../components/emptyForms";
 import { NavigateTabs } from "../components/NavigateTabs";
-import {
-  MealScheduleAnswerType,
-  TrainingScheduleAnswerType,
-} from "../types/types";
+import { TrainingScheduleAnswerType } from "../types/types";
 import { RequestTrainingPlanForm } from "../components/RequestForm/RequestTrainingPlanForm";
 import { TrainingPlans } from "./TrainingplanCards";
 
@@ -17,7 +11,7 @@ export const TrainingPlanPageContent = () => {
   const [form, setForm] = useState(emptyTrainingForm);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const [answer, setAnswer] = useState<TrainingScheduleAnswerType | null>(null);
-  const [clientSessionId, setClientSessionId] = useState(crypto.randomUUID());
+  const clientSessionId = crypto.randomUUID();
 
   return (
     <Stack direction={"column"} alignItems={"center"}>

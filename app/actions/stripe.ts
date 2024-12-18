@@ -4,7 +4,6 @@ import type { Stripe } from "stripe";
 import { headers } from "next/headers";
 import { stripe } from "../lib/stripe";
 import { formatAmountForStripe } from "../utils/stripe-helpers";
-import { MealsPerWeek, TrainingsPerWeekType } from "../types/types";
 
 export async function createCheckoutSession(
   data: FormData,

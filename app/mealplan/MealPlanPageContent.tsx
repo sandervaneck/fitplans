@@ -11,7 +11,7 @@ export const MealPlanPageContent = () => {
   const [form, setForm] = useState(emptyMealInputForm);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const [answer, setAnswer] = useState<MealScheduleAnswerType | null>(null);
-  const [clientSessionId, setClientSessionId] = useState(crypto.randomUUID());
+  const clientSessionId = crypto.randomUUID();
 
   return (
     <Stack direction={"column"} alignItems={"center"}>
