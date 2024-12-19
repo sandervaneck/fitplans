@@ -1,19 +1,17 @@
 import { TrainingPlanRenderdPage } from "./components/TrainingPlanRenderdPage";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     clientSessionId: string;
-  };
+  }>;
 }
 
 export default async function TrainingPlanPage({ params }: PageProps) {
-  if (!params?.clientSessionId) {
-    return <div>Error: Missing client session ID</div>;
-  }
+  const { clientSessionId } = await params; // Ensure params is awaited if Next.js expects it
 
   return (
     <div>
-      <TrainingPlanRenderdPage clientSessionId={params.clientSessionId} />
+      <TrainingPlanRenderdPage clientSessionId={clientSessionId} />
     </div>
   );
 }

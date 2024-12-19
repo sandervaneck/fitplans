@@ -3,19 +3,18 @@
 import { MealPlanRenderdPage } from "./components/MealPlanRenderdPage";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     clientSessionId: string;
-  };
+  }>;
 }
 
 export default async function MealPlanPage({ params }: PageProps) {
-  if (!params?.clientSessionId) {
-    return <div>Error: Missing client session ID</div>;
-  }
+  // Await params if needed (Next.js requires this in some cases)
+  const { clientSessionId } = await params; // Ensure params is awaited if Next.js expects it
 
   return (
     <div>
-      <MealPlanRenderdPage clientSessionId={params.clientSessionId} />
+      <MealPlanRenderdPage clientSessionId={clientSessionId} />
     </div>
   );
 }
