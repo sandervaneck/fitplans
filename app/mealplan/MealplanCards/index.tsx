@@ -3,7 +3,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { DownloadRounded } from "@mui/icons-material";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { Meal, MealsPerWeek } from "@/app/types/types";
+import { MealsPerWeek } from "@/app/types/types";
 import { MealPlan } from "./MealPlan";
 import CheckoutForm from "@/app/components/stripe/embedded/CheckoutForm";
 

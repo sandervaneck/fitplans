@@ -15,10 +15,8 @@ export const MealPlanPageContent = () => {
 
   const mealsPerMealType: Record<string, Meal[]> = {};
 
-  console.log(mealsPerMealType);
   const createdMealPlan =
     answer && randomMealPlanCreator(answer, mealsPerMealType, form.weeks);
-  console.log(createdMealPlan);
   return (
     <Stack direction={"column"} alignItems={"center"}>
       <Card
@@ -95,7 +93,7 @@ const randomMealPlanCreator = (
     const mealTypes = [
       ...new Set(answer.meals.flatMap((i) => i.monday.map((m) => m.mealtype))),
     ];
-    const generateDayMeals = (day: keyof MealsPerWeek): Meal[] => {
+    const generateDayMeals = (): Meal[] => {
       const dayMeals: Meal[] = [];
       mealTypes.forEach((mealType) => {
         // Get a random meal for this mealType from mealsPerMealType
@@ -106,13 +104,13 @@ const randomMealPlanCreator = (
     };
 
     // Assign meals for each day of the week
-    weekMeals.monday = generateDayMeals("monday");
-    weekMeals.tuesday = generateDayMeals("tuesday");
-    weekMeals.wednesday = generateDayMeals("wednesday");
-    weekMeals.thursday = generateDayMeals("thursday");
-    weekMeals.friday = generateDayMeals("friday");
-    weekMeals.saturday = generateDayMeals("saturday");
-    weekMeals.sunday = generateDayMeals("sunday");
+    weekMeals.monday = generateDayMeals();
+    weekMeals.tuesday = generateDayMeals();
+    weekMeals.wednesday = generateDayMeals();
+    weekMeals.thursday = generateDayMeals();
+    weekMeals.friday = generateDayMeals();
+    weekMeals.saturday = generateDayMeals();
+    weekMeals.sunday = generateDayMeals();
 
     return weekMeals;
   };
