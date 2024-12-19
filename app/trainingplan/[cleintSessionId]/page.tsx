@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { TrainingPlanRenderdPage } from "./components/TrainingPlanRenderdPage";
 
 interface PageProps {
@@ -7,15 +6,14 @@ interface PageProps {
   };
 }
 
-// Next.js page component for the route
-const TrainingPlanPage = ({ params }: PageProps) => {
-  const { clientSessionId } = params;
+export default async function TrainingPlanPage({ params }: PageProps) {
+  if (!params?.clientSessionId) {
+    return <div>Error: Missing client session ID</div>;
+  }
 
   return (
     <div>
-      <TrainingPlanRenderdPage clientSessionId={clientSessionId} />
+      <TrainingPlanRenderdPage clientSessionId={params.clientSessionId} />
     </div>
   );
-};
-
-export default TrainingPlanPage;
+}
