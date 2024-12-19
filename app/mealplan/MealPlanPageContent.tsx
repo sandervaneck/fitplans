@@ -4,7 +4,7 @@ import { useState } from "react";
 import { emptyMealInputForm } from "../components/emptyForms";
 import { NavigateTabs } from "../components/NavigateTabs";
 import { RequestMealPlanForm } from "../components/RequestForm/RequestMealPlanForm";
-import { MealScheduleAnswerType } from "../types/types";
+import { Meal, MealScheduleAnswerType, MealsPerWeek } from "../types/types";
 import { MealPlans } from "./MealplanCards";
 
 export const MealPlanPageContent = () => {
@@ -13,6 +13,12 @@ export const MealPlanPageContent = () => {
   const [answer, setAnswer] = useState<MealScheduleAnswerType | null>(null);
   const clientSessionId = crypto.randomUUID();
 
+  const mealsPerMealType: Record<string, Meal[]> = {};
+
+  console.log(mealsPerMealType);
+  const createdMealPlan =
+    answer && randomMealPlanCreator(answer, mealsPerMealType, form.weeks);
+  console.log(createdMealPlan);
   return (
     <Stack direction={"column"} alignItems={"center"}>
       <Card
@@ -34,9 +40,9 @@ export const MealPlanPageContent = () => {
           setAnswer={setAnswer}
         />
       </Card>
-      {answer !== null && (
+      {createdMealPlan !== null && (
         <MealPlans
-          plans={answer.meals}
+          plans={createdMealPlan}
           preview={true}
           clientSessionId={clientSessionId}
         />
@@ -44,3 +50,78 @@ export const MealPlanPageContent = () => {
     </Stack>
   );
 };
+
+const randomMealPlanCreator = (
+  answer: MealScheduleAnswerType,
+  mealsPerMealType: Record<string, Meal[]>,
+  weeks: number
+): MealsPerWeek[] => {
+  // Iterate over the plans for each week
+  answer.meals.forEach((weekPlan) => {
+    // Iterate over each day of the week
+    Object.values(weekPlan).forEach((dayMeals) => {
+      // Ensure that dayMeals is an array of meals
+      if (Array.isArray(dayMeals)) {
+        // Iterate over each meal and categorize by mealtype
+        dayMeals.forEach((meal) => {
+          if (!mealsPerMealType[meal.mealtype]) {
+            mealsPerMealType[meal.mealtype] = [];
+          }
+          mealsPerMealType[meal.mealtype].push(meal);
+        });
+      }
+    });
+  });
+
+  const getRandomMeal = (meals: Meal[]): Meal => {
+    const randomIndex = Math.floor(Math.random() * meals.length);
+    return meals[randomIndex];
+  };
+
+  // Function to generate a MealsPerWeek
+  const generateMealsPerWeek = (i: number): MealsPerWeek => {
+    const weekMeals: MealsPerWeek = {
+      week: i, // Set this later if needed
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+    };
+
+    // Function to generate meals for a specific day (one of the weekdays)
+    const mealTypes = [
+      ...new Set(answer.meals.flatMap((i) => i.monday.map((m) => m.mealtype))),
+    ];
+    const generateDayMeals = (day: keyof MealsPerWeek): Meal[] => {
+      const dayMeals: Meal[] = [];
+      mealTypes.forEach((mealType) => {
+        // Get a random meal for this mealType from mealsPerMealType
+        const randomMeal = getRandomMeal(mealsPerMealType[mealType]);
+        dayMeals.push(randomMeal);
+      });
+      return dayMeals;
+    };
+
+    // Assign meals for each day of the week
+    weekMeals.monday = generateDayMeals("monday");
+    weekMeals.tuesday = generateDayMeals("tuesday");
+    weekMeals.wednesday = generateDayMeals("wednesday");
+    weekMeals.thursday = generateDayMeals("thursday");
+    weekMeals.friday = generateDayMeals("friday");
+    weekMeals.saturday = generateDayMeals("saturday");
+    weekMeals.sunday = generateDayMeals("sunday");
+
+    return weekMeals;
+  };
+
+  const generatedWeekMeals = createRange(0, weeks).map((week, i) =>
+    generateMealsPerWeek(i + 1)
+  );
+  return generatedWeekMeals;
+};
+
+export const createRange = (start: number, end: number): number[] =>
+  Array.from({ length: end - start }, (v, k) => k + start);

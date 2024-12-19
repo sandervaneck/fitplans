@@ -22,7 +22,7 @@ export const getMealPrompt = (form: MealFormType): string => {
   I would like to eat ${form.meals.mealsaday} times a day,
   My favorite ingredients are: ${form.meals.favoritefoods} and I do not eat ${form.meals.exclusions} 
   
-  Please make your answer include an overview for ${form.weeks} weeks, 
+  Please make your answer include an overview for 7 days, 
   Where each week shows ${form.meals.mealsaday} meals for each of the seven days, and
-  For each meal explain what meal at what moment (mealtype e.g breakfast, snack, dinner, etc), with ingredient and its quantities, recipe instructions and recipe macros.`;
+  For each meal explain what meal at what moment (mealtype e.g breakfast, snack, dinner, etc, make sure that no two same mealtypes on the same day), with ingredient and its quantities, recipe instructions and recipe macros.`;
 };

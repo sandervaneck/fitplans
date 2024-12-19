@@ -40,7 +40,14 @@ export const RequestMealPlanForm: React.FC<RequestMealPlanFormProps> = ({
       <Button variant="contained" onClick={() => getMyMeal(form)}>
         Get my schedule!
       </Button>
-      {loading && <CircularProgress />}
+      {loading && (
+        <>
+          <Typography variant="h4" color="black">
+            Writing your mealplan...
+          </Typography>
+          <CircularProgress />
+        </>
+      )}
     </Stack>
   );
 };
