@@ -8,15 +8,14 @@ interface PageProps {
   };
 }
 
-// Next.js page component for the route
-const MealPlanPage = ({ params }: PageProps) => {
-  const { clientSessionId } = params;
+export default async function MealPlanPage({ params }: PageProps) {
+  if (!params?.clientSessionId) {
+    return <div>Error: Missing client session ID</div>;
+  }
 
   return (
     <div>
-      <MealPlanRenderdPage clientSessionId={clientSessionId} />
+      <MealPlanRenderdPage clientSessionId={params.clientSessionId} />
     </div>
   );
-};
-
-export default MealPlanPage;
+}
