@@ -3,75 +3,67 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        Fitplanner
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">Choose your diet or training wishes</li>
-          <li>And let AI create a tailored made plan</li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="/mealplan"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Get your Meal Plan
-          </Link>
-          <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="/trainingplan"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Get your Training Plan
+    <div className="bg-[hsl(0,0%,99%)] min-h-screen">
+      {/* Navbar */}
+      <header className="flex justify-between items-center px-8 py-4">
+        <h1 className="text-2xl font-bold text-[hsl(0,93%,6%)]">Fitplans</h1>
+        <div className="space-x-4">
+          <Link href="mailto:sander@mychefsbase.com?subject=Fitplans%20question">
+            <button className="px-4 py-2 text-sm font-medium text-[hsl(0,0%,99%)] bg-[hsl(45,90%,40%)] rounded-md">
+              Contact us
+            </button>
           </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <Link
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.swipingchef.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative px-8 py-20 text-center lg:text-left lg:flex lg:justify-between lg:items-center">
+        <div className="max-w-lg">
+          <h2 className="text-6xl font-bold text-[hsl(220,30%,6%)]">
+            Fitplans
+          </h2>
+          <h3 className="text-2xl font-semibold text-[hsl(0,94%,18%)]">
+            Tailor-made <br />
+            Nutrition & Workout plans
+          </h3>
+          <p className="mt-4 text-[hsl(220,20%,42%)]">
+            Fill in your weight, age and goals <br />
+            Receive clear plans
+          </p>
+          <div className="mt-6 space-x-4">
+            <Link href="/mealplan">
+              <button className="px-4 py-2 text-[hsl(0,0%,99%)] bg-[hsl(45,90%,40%)] rounded-md">
+                Nutrition plans
+              </button>
+            </Link>
+            <Link href="/trainingplan">
+              <button className="px-4 py-2 text-[hsl(0,0%,99%)] bg-[hsl(45,90%,40%)] rounded-md">
+                Workout plans
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="relative mt-10 lg:mt-0">
           <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+            src="/fitness-model.png"
+            alt="Fitness Model"
+            width={500}
+            height={500}
+            className="rounded-lg"
           />
-          Create and manage your recipes in SwipingChef
-        </Link>
-        <Link
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.techvaneck.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Designed by techvaneck.com →
-        </Link>
+          <div className="absolute bottom-4 left-4 bg-[hsl(0,0%,99%)] p-2 rounded-md shadow-md">
+            <p className="text-sm font-medium text-[hsl(220,20%,42%)]">
+              1000+ satisfied users
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-8 py-6 text-center bg-[hsl(45,100%,97%)]">
+        <div className="flex justify-center space-x-8">
+          {/* Add footer logos or links here if needed */}
+        </div>
       </footer>
     </div>
   );

@@ -18,7 +18,7 @@ export const SearchAppBar = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
               >
-                FitPlanner
+                FitPlans
               </Typography>
             </Link>
           </Toolbar>

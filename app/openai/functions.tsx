@@ -8,7 +8,7 @@ export const getTrainingPrompt = (form: TrainingFormType): string => {
   I would like to work out ${form.workouts.numberofworkoutsaweek} times a week,
   I am mostly interested in doing ${form.workouts}.
   
-  Please make your answer include an overview for ${form.weeks} weeks, showing which things to do in what location (i.e road/forest/gym), total time, the excercises (for each excercises give the number of reps (i.e 12), number of sets (i.e 4) and the excercise itself (i.e squats) and workout type (i.e weigth lifting) on each workout day.
+  Please make your answer include an overview for ${form.weeks} weeks, showing which things to do in what location (i.e road/forest/gym), total time, workout type (i.e weigth lifting), and the excercises (for each excercise provide the name and number of repetitions in one strin) on each workout day.
   `;
 };
 
@@ -24,5 +24,5 @@ export const getMealPrompt = (form: MealFormType): string => {
   
   Please make your answer include an overview for 7 days, 
   Where each week shows ${form.meals.mealsaday} meals for each of the seven days, and
-  For each meal explain what meal at what moment (mealtype e.g breakfast, snack, dinner, etc, make sure that no two same mealtypes on the same day), with ingredient and its quantities, recipe instructions and recipe macros.`;
+  For each meal explain what meal at what moment (mealtype e.g breakfast, snack, dinner, etc, make sure that no two same mealtypes on the same day), with a list of ingredients that also include quantities, recipe instructions and recipe macros.`;
 };

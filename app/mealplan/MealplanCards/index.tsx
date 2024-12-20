@@ -21,7 +21,7 @@ export const MealPlans: React.FC<MealPlanProps> = ({
 
   const handleDownload = async () => {
     const pdf = new jsPDF("p", "mm", "a4"); // PDF format A4
-    const pageWidth = 190; // PDF usable width
+    const pageWidth = 150; // PDF usable width
     const pageHeight = 297; // PDF height in mm
 
     for (let i = 0; i < plans.length; i++) {

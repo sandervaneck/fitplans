@@ -25,13 +25,6 @@ export type Meal = {
   carbs: number;
   fats: number;
 };
-export type Macros = {
-  kcal: number;
-  protein: number;
-  carbs: number;
-  fats: number;
-  fibres: number;
-};
 export type TrainingsPerWeekType = {
   week: number;
   trainings: TrainingType[];
