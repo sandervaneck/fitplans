@@ -51,7 +51,7 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
 
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
-  const amount = 7.5;
+  const amount = 3.5;
   const formAction = async (data: FormData): Promise<void> => {
     const uiMode = data.get(
       "uiMode"

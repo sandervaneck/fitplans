@@ -42,7 +42,7 @@ export const RequestMealPlanForm: React.FC<RequestMealPlanFormProps> = ({
       </Button>
       {loading && (
         <>
-          <Typography variant="h4" color="black">
+          <Typography variant="h4" color="white">
             Writing your mealplan...
           </Typography>
           <CircularProgress />
