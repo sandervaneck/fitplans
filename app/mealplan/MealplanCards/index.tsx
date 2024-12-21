@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import { DownloadRounded } from "@mui/icons-material";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -18,10 +18,11 @@ export const MealPlans: React.FC<MealPlanProps> = ({
   clientSessionId,
 }) => {
   const planRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleDownload = async () => {
     const pdf = new jsPDF("p", "mm", "a4"); // PDF format A4
-    const pageWidth = 150; // PDF usable width
+    const pageWidth = isMobile ? 90 : 150; // PDF usable width
     const pageHeight = 297; // PDF height in mm
 
     for (let i = 0; i < plans.length; i++) {
