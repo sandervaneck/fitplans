@@ -10,7 +10,7 @@ export default function Home() {
         <div className="space-x-4">
           <Link href="mailto:sander@mychefsbase.com?subject=Fitplans%20question">
             <button className="px-4 py-2 text-sm font-medium text-[hsl(0,0%,99%)] bg-[hsl(45,90%,40%)] rounded-md">
-              Contact us
+              Contact fitplans
             </button>
           </Link>
         </div>
