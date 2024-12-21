@@ -74,30 +74,28 @@ export const MealPlans: React.FC<MealPlanProps> = ({
         />
       )}
 
-      {plans.map(
-        (plan, index) =>
-          preview === false ||
-          (preview === true && index === 0 && (
-            <div
-              key={index}
-              ref={(el) => {
-                planRefs.current[index] = el;
-              }}
-              style={{
-                marginBottom: "10px",
-                padding: "10px",
-                backgroundColor: "white",
-              }}
+      {(preview ? plans.filter((plan, index) => index === 0) : plans).map(
+        (plan, index) => (
+          <div
+            key={index}
+            ref={(el) => {
+              planRefs.current[index] = el;
+            }}
+            style={{
+              marginBottom: "10px",
+              padding: "10px",
+              backgroundColor: "white",
+            }}
+          >
+            <Typography
+              align="center"
+              style={{ marginBottom: "10px", color: "black" }}
             >
-              <Typography
-                align="center"
-                style={{ marginBottom: "10px", color: "black" }}
-              >
-                Week {index + 1}
-              </Typography>
-              <MealPlan plan={plan} preview={preview} />
-            </div>
-          ))
+              Week {index + 1}
+            </Typography>
+            <MealPlan plan={plan} preview={preview} />
+          </div>
+        )
       )}
     </Stack>
   );
