@@ -21,31 +21,89 @@ export const MealPlans: React.FC<MealPlanProps> = ({
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleDownload = async () => {
-    const pdf = new jsPDF("p", "mm", "a4"); // PDF format A4
-    const pageWidth = isMobile ? 90 : 150; // PDF usable width
+    const pdf = new jsPDF("p", "mm", "a4"); // PDF format A4 (portrait)
+    const pageWidth = isMobile ? 220 : 150; // PDF usable width for A4 (adjusted for mobile)
     const pageHeight = 297; // PDF height in mm
+    const margin = 10; // Margin for better spacing
+    const scaleFactor = isMobile ? 3 : 2; // Higher scale for mobile to enhance quality
 
-    for (let i = 0; i < plans.length; i++) {
-      const planElement = planRefs.current[i];
-      if (planElement) {
-        // Convert each MealPlan to canvas
-        const canvas = await html2canvas(planElement, { scale: 2 }); // High-res capture
-        const imgData = canvas.toDataURL("image/png");
+    let currentPlanIndex = 0;
 
-        const imgWidth = pageWidth;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    while (currentPlanIndex < plans.length) {
+      if (isMobile && currentPlanIndex + 1 < plans.length) {
+        // Render two plans side-by-side on the same page (for mobile)
+        const planElement1 = planRefs.current[currentPlanIndex];
+        const planElement2 = planRefs.current[currentPlanIndex + 1];
 
-        // Add the MealPlan image to PDF
-        if (i !== 0) pdf.addPage(); // Add a new page after the first one
-        pdf.addImage(
-          imgData,
-          "PNG",
-          10,
-          10,
-          imgWidth,
-          Math.min(imgHeight, pageHeight - 20)
-        );
+        if (planElement1 && planElement2) {
+          const canvas1 = await html2canvas(planElement1, {
+            scale: scaleFactor,
+          });
+          const canvas2 = await html2canvas(planElement2, {
+            scale: scaleFactor,
+          });
+
+          const imgData1 = canvas1.toDataURL("image/png");
+          const imgData2 = canvas2.toDataURL("image/png");
+
+          // Calculate dimensions for side-by-side placement
+          const imgWidth = (pageWidth - margin * 3) / 2; // Divide usable width by 2
+          const imgHeight1 = (canvas1.height * imgWidth) / canvas1.width;
+          const imgHeight2 = (canvas2.height * imgWidth) / canvas2.width;
+
+          // Ensure both weeks fit within the page height
+          const maxHeight = Math.min(
+            imgHeight1,
+            imgHeight2,
+            pageHeight - margin * 2
+          );
+
+          // Add images side by side
+          pdf.addImage(imgData1, "PNG", margin, margin, imgWidth, maxHeight);
+          pdf.addImage(
+            imgData2,
+            "PNG",
+            margin + imgWidth + margin,
+            margin,
+            imgWidth,
+            maxHeight
+          );
+
+          // Skip to the next two weeks
+          currentPlanIndex += 2;
+        } else {
+          // Handle if one of the elements is null (shouldn't happen in normal use)
+          break;
+        }
+      } else {
+        // Render a single plan (for desktop or the last plan on mobile)
+        const planElement = planRefs.current[currentPlanIndex];
+
+        if (planElement) {
+          const canvas = await html2canvas(planElement, { scale: scaleFactor });
+          const imgData = canvas.toDataURL("image/png");
+
+          const imgWidth = pageWidth - margin * 2;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          if (currentPlanIndex !== 0) pdf.addPage(); // Add a new page for each additional plan
+          pdf.addImage(
+            imgData,
+            "PNG",
+            margin,
+            margin,
+            imgWidth,
+            Math.min(imgHeight, pageHeight - margin * 2)
+          );
+
+          currentPlanIndex++;
+        } else {
+          // Handle if the element is null (shouldn't happen in normal use)
+          break;
+        }
       }
+
+      if (!isMobile) pdf.addPage(); // Ensure one plan per page for desktop
     }
 
     pdf.save("nutrition-plan.pdf");
