@@ -113,7 +113,7 @@ export const MealOutput = z.object({
 export const emptyTrainingForm: TrainingFormType = {
   weigth: 78,
   age: 34,
-  goal: "Bigger biceps",
+  goal: "Improve my leg strength and chest size",
   weeks: 2,
   workouts: {
     numberofworkoutsaweek: 5,
@@ -123,7 +123,7 @@ export const emptyTrainingForm: TrainingFormType = {
 export const emptyMealInputForm: MealFormType = {
   weigth: 78,
   age: 34,
-  goal: "Bigger biceps",
+  goal: "Grow my chest",
   weeks: 2,
   meals: {
     mealsaday: 4,

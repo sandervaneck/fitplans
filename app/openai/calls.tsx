@@ -24,6 +24,7 @@ export const callTrainingGpt = async (
         },
       ],
       response_format: zodResponseFormat(TrainingOutput, "trainings"),
+      max_completion_tokens: 8812,
     });
 
     const answer: TrainingScheduleAnswerType | null =
@@ -59,6 +60,7 @@ export const callGptMeals = async (
         },
       ],
       response_format: zodResponseFormat(MealOutput, "meals"),
+      max_completion_tokens: 8812,
     });
 
     const answer: MealScheduleAnswerType | null =

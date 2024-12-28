@@ -1,6 +1,14 @@
 import { MealFormType, TrainingFormType } from "../types/types";
 
+export const getTennisPrompt = (form: TrainingFormType): string => {
+  return `
+  Please provide a clear schema for the following sports person:
+Sports: Tennis. Age: ${form.age}. My weight: ${form.weigth}. Current level: 3.8 in the dutch KNLTB system. Goal: to achieve rating 3.3 within 6 months by improving the speed of my feet on the court.
+I need a strength & conditioning plan of ${form.workouts.numberofworkoutsaweek} moments a week with a clear explanation of each exercise for ${form.weeks} weeks. Can you provide this for me?`;
+};
+
 export const getTrainingPrompt = (form: TrainingFormType): string => {
+  if (form.workouts.workouts.includes("Tennis")) return getTennisPrompt(form);
   return `Provide me with a training schema for someone that has the following requests:
   My current weigth is: ${form.weigth},
   My current age is: ${form.age},
@@ -13,7 +21,10 @@ export const getTrainingPrompt = (form: TrainingFormType): string => {
 };
 
 export const getMealPrompt = (form: MealFormType): string => {
-  return `Provide me with a nutrition schema for someone that has the following requests, keeping in mind that to gain weight or muscle, one should eat in a calorie surplus (more than 2500 kcal per day), while cutting means eating in a deficit (below 2500 daily kcal):
+  return `
+  When someone wants to gain muscle, he should eat in a calorie surplus (over 2500 kcal, 150 g of protein, 200 g of carbs, 90 g of fats a day). 
+  When wanting to lose muscle, he should eat in a calorie deficit (1800-2300 kcal, 100-150 g of protein, 150-200 g of carbs, 30-70 g of fats a day).
+  Provide me with a nutrition schema for someone that has the following requests, keeping in mind that the total sum of calories, proteins, carbs and fats of all meals in one day are in line with the goal. 
   My current weigth is: ${form.weigth},
   My current age is: ${form.age},
   My goal is: ${form.goal},

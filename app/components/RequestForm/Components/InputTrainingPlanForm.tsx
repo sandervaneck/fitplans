@@ -12,6 +12,126 @@ interface InputTrainingPlanFormProps {
   isMobile: boolean;
 }
 
+export const InputSportPlanForm: React.FC<InputTrainingPlanFormProps> = ({
+  form,
+  setForm,
+  isMobile,
+}) => {
+  return (
+    <>
+      <Grid container size={12}>
+        <Grid size={isMobile ? 12 : 6}>
+          <FormField
+            label="Age"
+            style={{
+              flex: 1, // Ensures the form field doesn't break the line
+              minWidth: "200px", // Optional: Controls the minimum width
+            }}
+            placeholder="i.e 34"
+            endAdornment="Years"
+            value={String(form.age)}
+            setValue={(value) => setForm({ ...form, age: Number(value) })}
+          />{" "}
+          <Box
+            sx={{
+              borderBottom: "1px solid #000",
+              marginTop: 1,
+            }}
+          />
+        </Grid>
+        <Grid size={isMobile ? 12 : 6}>
+          <FormField
+            label="Current weight"
+            style={{
+              flex: 1, // Ensures the form field doesn't break the line
+              minWidth: "200px", // Optional: Controls the minimum width
+            }}
+            placeholder="i.e 78"
+            endAdornment="Kg"
+            value={String(form.weigth)}
+            setValue={(value) => setForm({ ...form, weigth: Number(value) })}
+          />{" "}
+          <Box
+            sx={{
+              borderBottom: "1px solid #000",
+              marginTop: 1,
+            }}
+          />
+        </Grid>
+        <Grid size={isMobile ? 12 : 6}>
+          <FormSelect
+            label="Sport"
+            value={String(form.workouts.workouts)}
+            setValue={(value) =>
+              setForm({
+                ...form,
+                workouts: { ...form.workouts, workouts: value.split(",") },
+              })
+            }
+            options={["Tennis", "Calisthenics"]}
+          />{" "}
+          <Box
+            sx={{
+              borderBottom: "1px solid #000",
+              marginTop: 1,
+            }}
+          />
+        </Grid>
+        <Grid size={isMobile ? 12 : 6}>
+          <FormSelect
+            label="Current level"
+            value={form.goal}
+            setValue={(value) =>
+              setForm({
+                ...form,
+                goal: String(value),
+              })
+            }
+            options={
+              form.workouts.workouts.includes("Tennis")
+                ? ["Rating 3", "Rating 4", "Rating 5"]
+                : [
+                    "Can do Muscle Up",
+                    "Can do Front Lever",
+                    "Can do Human Flag",
+                    "Can do Pistol Squat",
+                  ]
+            }
+          />{" "}
+          <Box
+            sx={{
+              borderBottom: "1px solid #000",
+              marginTop: 1,
+            }}
+          />
+        </Grid>
+        <Grid size={isMobile ? 12 : 6}>
+          <FormSelectMultiple
+            label="Goal"
+            value={String(form.goal).split(",")}
+            handleChange={(value) =>
+              setForm({
+                ...form,
+                goal: String(value),
+              })
+            }
+            options={
+              form.workouts.workouts.includes("Tennis")
+                ? ["Feetwork", "Endurance", "Explosive strength"]
+                : ["Muscle Up", "Front Lever", "Human Flag", "Pistol Squat"]
+            }
+          />{" "}
+          <Box
+            sx={{
+              borderBottom: "1px solid #000",
+              marginTop: 1,
+            }}
+          />
+        </Grid>
+      </Grid>
+    </>
+  );
+};
 export const InputTrainingPlanForm: React.FC<InputTrainingPlanFormProps> = ({
   form,
   setForm,
@@ -105,6 +225,7 @@ export const InputTrainingPlanForm: React.FC<InputTrainingPlanFormProps> = ({
               "Football",
               "Biking",
               "Swimming",
+              "Tennis",
             ]}
             handleChange={(o) =>
               o.target.value &&

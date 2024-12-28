@@ -4,6 +4,8 @@ import { FC, useEffect, useState } from "react";
 import { TrainingsPerWeekType } from "@/app/types/types";
 import { SearchAppBar } from "@/app/components/AppBar";
 import { TrainingPlans } from "../../TrainingplanCards";
+import { useAuth } from "@/app/components/Authentication/Provider";
+import { useMediaQuery } from "@mui/material";
 
 interface TrainingPlanPageProps {
   clientSessionId: string;
@@ -15,7 +17,8 @@ export const TrainingPlanRenderdPage: FC<TrainingPlanPageProps> = ({
   const [trainingPlan, setTrainingPlan] = useState<
     TrainingsPerWeekType[] | null
   >(null);
-
+  const { id, setId } = useAuth();
+  const isMobile = useMediaQuery("(max-width: 600px)");
   // Dynamically access the clientSessionId from params
 
   // This effect runs only on the client side
@@ -35,7 +38,7 @@ export const TrainingPlanRenderdPage: FC<TrainingPlanPageProps> = ({
 
   return (
     <div>
-      <SearchAppBar />
+      <SearchAppBar isMobile={isMobile} id={id} setId={setId} />
       {trainingPlan && (
         <TrainingPlans
           plans={trainingPlan}

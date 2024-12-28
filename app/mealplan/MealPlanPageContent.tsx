@@ -1,5 +1,5 @@
 "use client";
-import { useMediaQuery, Stack, Card } from "@mui/material";
+import { Stack, Card } from "@mui/material";
 import { useState } from "react";
 import { emptyMealInputForm } from "../components/emptyForms";
 import { NavigateTabs } from "../components/NavigateTabs";
@@ -481,9 +481,11 @@ import { MealPlans } from "./MealplanCards";
 //     },
 //   ],
 // };
-export const MealPlanPageContent = () => {
+interface Props {
+  isMobile: boolean;
+}
+export const MealPlanPageContent: React.FC<Props> = ({ isMobile }) => {
   const [form, setForm] = useState(emptyMealInputForm);
-  const isMobile = useMediaQuery("(max-width: 600px)");
   const [answer, setAnswer] = useState<MealScheduleAnswerType | null>(null);
   const clientSessionId = crypto.randomUUID();
 

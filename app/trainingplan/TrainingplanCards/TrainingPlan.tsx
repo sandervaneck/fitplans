@@ -143,7 +143,7 @@ export const TrainingRows = ({ training }: { training: TrainingType }) => {
           color: "#6d4c41",
         }}
       >
-        Total Time: {training.totaltime} <br />
+        Total Time: {training.totaltime} min <br />
         Location: {training.location}
       </div>
       <hr

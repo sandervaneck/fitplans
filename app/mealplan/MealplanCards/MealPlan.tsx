@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { MealsPerWeek, Meal } from "@/app/types/types";
 
 // Type for the entire meal plan
@@ -39,7 +39,9 @@ export const MealPlan: React.FC<MealPlanProps> = ({ plan, preview }) => {
         {returnTilesForDay("Monday", plan.monday)}
         {returnTilesForDay("Tuesday", plan.tuesday)}
         {preview ? (
-          <>The rest you can see when pressing the payment button</>
+          <Typography variant="h6" color="black" align="center">
+            Press Pay Now to view full plan
+          </Typography>
         ) : (
           <>
             {returnTilesForDay("Wednesday", plan.wednesday)}

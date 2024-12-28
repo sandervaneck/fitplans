@@ -23,8 +23,8 @@ export default function Home() {
             Fitplans
           </h2>
           <h3 className="text-2xl font-semibold text-[hsl(0,94%,18%)]">
-            Tailor-made <br />
-            Nutrition & Workout plans
+            What is your goal? <br />
+            Lets provide you with a plan!
           </h3>
           <p className="mt-4 text-[hsl(220,20%,42%)]">
             Fill in your weight, age and goals <br />

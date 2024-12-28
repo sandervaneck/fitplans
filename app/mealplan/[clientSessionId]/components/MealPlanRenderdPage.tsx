@@ -4,6 +4,9 @@ import { FC, useEffect, useState } from "react";
 import { MealsPerWeek } from "@/app/types/types";
 import { MealPlans } from "../../MealplanCards";
 import { SearchAppBar } from "@/app/components/AppBar";
+import { useAuth } from "@/app/components/Authentication/Provider";
+import { useMediaQuery } from "@mui/material";
+// import { Provider } from "@/app/utils/ApolloProvider";
 
 interface MealPlanPageProps {
   clientSessionId: string;
@@ -13,7 +16,8 @@ export const MealPlanRenderdPage: FC<MealPlanPageProps> = ({
   clientSessionId,
 }) => {
   const [mealPlan, setMealPlan] = useState<MealsPerWeek[] | null>(null);
-
+  const { id, setId } = useAuth();
+  const isMobile = useMediaQuery("(max-width: 600px)");
   // Dynamically access the clientSessionId from params
 
   // This effect runs only on the client side
@@ -32,7 +36,8 @@ export const MealPlanRenderdPage: FC<MealPlanPageProps> = ({
 
   return (
     <div>
-      <SearchAppBar />
+      {/* <Provider> */}
+      <SearchAppBar isMobile={isMobile} id={id} setId={setId} />
       {mealPlan && (
         <MealPlans
           plans={mealPlan}
@@ -40,6 +45,7 @@ export const MealPlanRenderdPage: FC<MealPlanPageProps> = ({
           preview={false}
         />
       )}
+      {/* </Provider> */}
     </div>
   );
 };

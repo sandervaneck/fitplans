@@ -1,21 +1,21 @@
 "use client";
-
 import { JSX } from "react";
 import AppTheme from "../theme/AppTheme";
-import { CssBaseline, useMediaQuery } from "@mui/material";
 import { SearchAppBar } from "../components/AppBar";
-import { TrainingPlanPageContent } from "./TrainingPlanContent";
 import { useAuth } from "../components/Authentication/Provider";
+import { useMediaQuery } from "@mui/material";
+import Form from "./Form";
 
-export default function TrainingplanPage(): JSX.Element {
+export default function StpperPage(): JSX.Element {
   const { id, setId } = useAuth();
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
     <AppTheme>
-      <CssBaseline />
+      {/* <Provider> */}
       <SearchAppBar id={id} setId={setId} isMobile={isMobile} />
-      <TrainingPlanPageContent />
+      <Form />
+      {/* </Provider> */}
     </AppTheme>
   );
 }
