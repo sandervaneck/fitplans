@@ -169,11 +169,9 @@ export default function Form() {
             >
               <div>
                 <Typography variant="subtitle2" gutterBottom>
-                  Selected products
+                  Plan details
                 </Typography>
-                <Typography variant="body1">
-                  {activeStep >= 2 ? "$144.97" : "$134.98"}
-                </Typography>
+                <Typography variant="body1">{form.sport}</Typography>
               </div>
               <InfoMobile form={form} />
             </CardContent>
