@@ -33,7 +33,6 @@ export const callTrainingGpt = async (
     if (!answer) {
       throw new Error("Received an empty response from ChatGPT.");
     }
-
     action(answer);
   } catch (error) {
     console.error("Error while processing the recipe:", error);

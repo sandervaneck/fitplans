@@ -31,7 +31,7 @@ export default function Review({ form, setForm }: InfoProps) {
           <ListItemText primary="Number of weeks:" />
           <FormSelect
             value={String(form.plantime)}
-            options={["1", "2", "3", "4", "5", "6", ">6"]}
+            options={["1", "2", "3", "4", "5", "6"]}
             setValue={(v) => {
               setForm({ ...form, plantime: Number(v) });
             }}

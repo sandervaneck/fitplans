@@ -1,14 +1,15 @@
+import { FormType } from "../stepper/Form";
 import { MealFormType, TrainingFormType } from "../types/types";
 
-export const getTennisPrompt = (form: TrainingFormType): string => {
+export const getTennisPrompt = (form: FormType): string => {
   return `
   Please provide a clear schema for the following sports person:
-Sports: Tennis. Age: ${form.age}. My weight: ${form.weigth}. Current level: 3.8 in the dutch KNLTB system. Goal: to achieve rating 3.3 within 6 months by improving the speed of my feet on the court.
-I need a strength & conditioning plan of ${form.workouts.numberofworkoutsaweek} moments a week with a clear explanation of each exercise for ${form.weeks} weeks. Can you provide this for me?`;
+Sports: Tennis. Age: ${form.age}. My weight: ${form.weight}. My experience: ${form.experience}. My level: ${form.currentstate}.
+Goal: Improve my ${form.goal} in ${form.plantime} weeks by training ${form.trainings} a week. 
+I need a strength & conditioning plan of ${form.trainings} moments a week with a clear explanation of each exercise for ${form.plantime} weeks. Can you provide this for me?`;
 };
 
 export const getTrainingPrompt = (form: TrainingFormType): string => {
-  if (form.workouts.workouts.includes("Tennis")) return getTennisPrompt(form);
   return `Provide me with a training schema for someone that has the following requests:
   My current weigth is: ${form.weigth},
   My current age is: ${form.age},

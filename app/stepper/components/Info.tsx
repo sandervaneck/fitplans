@@ -47,9 +47,10 @@ const products = (form: FormType) => [
 
 interface InfoProps {
   form: FormType;
+  getMyTrainings: (form: FormType) => void;
 }
 
-export default function Info({ form }: InfoProps) {
+export default function Info({ form, getMyTrainings }: InfoProps) {
   return (
     <React.Fragment>
       <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
@@ -72,7 +73,9 @@ export default function Info({ form }: InfoProps) {
           </ListItem>
         ))}
       </List>
-      <Button variant="contained">Get your Plan!</Button>
+      <Button variant="contained" onClick={() => getMyTrainings(form)}>
+        Get your Plan!
+      </Button>
     </React.Fragment>
   );
 }

@@ -26,7 +26,7 @@ export default function AddressForm({ form, setForm }: InfoProps) {
         </FormLabel>
         <FormSelect
           value={form.sport}
-          options={["Tennis", "Calisthenics"]}
+          options={["Tennis"]}
           setValue={(v) => {
             setForm({ ...form, sport: v });
           }}

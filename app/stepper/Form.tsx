@@ -5,7 +5,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid2";
-import Stack from "@mui/material/Stack";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
@@ -18,6 +17,11 @@ import InfoMobile from "./components/InfoMobile";
 import PaymentForm from "./components/PaymentForm";
 import Review from "./components/Review";
 import Info from "./components/Info";
+import { callTrainingGpt } from "../openai/calls";
+import { getTennisPrompt } from "../openai/functions";
+import { TrainingScheduleAnswerType } from "../types/types";
+import { CircularProgress } from "@mui/material";
+import { TrainingPlans } from "../trainingplan/TrainingplanCards";
 
 export type FormType = {
   age: number;
@@ -36,7 +40,7 @@ const emptyFormType: FormType = {
   weight: 77,
   sport: "Tennis",
   currentstate: "Level 3 KNLTB",
-  goal: "Speed improvement",
+  goal: "Endurance",
   plantime: 8,
   trainings: 6,
 };
@@ -66,6 +70,22 @@ export default function Form() {
   };
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+  const [loading, setLoading] = React.useState(false);
+  const [answer, setAnswer] = React.useState<TrainingScheduleAnswerType | null>(
+    null
+  );
+  const clientSessionId = crypto.randomUUID();
+
+  const getMyTrainings = (form: FormType) => {
+    const prompt = getTennisPrompt(form);
+    callTrainingGpt(
+      prompt,
+      (a: TrainingScheduleAnswerType) => {
+        setAnswer(a);
+      },
+      (b: boolean) => setLoading(b)
+    );
   };
   return (
     <AppTheme>
@@ -107,7 +127,7 @@ export default function Form() {
               maxWidth: 500,
             }}
           >
-            <Info form={form} />
+            <Info form={form} getMyTrainings={getMyTrainings} />
           </Box>
         </Grid>
         <Grid
@@ -173,7 +193,7 @@ export default function Form() {
                 </Typography>
                 <Typography variant="body1">{form.sport}</Typography>
               </div>
-              <InfoMobile form={form} />
+              <InfoMobile form={form} getMyTrainings={getMyTrainings} />
             </CardContent>
           </Card>
           <Box
@@ -187,108 +207,23 @@ export default function Form() {
               gap: { xs: 5, md: "none" },
             }}
           >
-            <Stepper
-              id="mobile-stepper"
-              activeStep={activeStep}
-              alternativeLabel
-              sx={{ display: { sm: "flex", md: "none" } }}
-            >
-              {steps.map((label) => (
-                <Step
-                  sx={{
-                    ":first-child": { pl: 0 },
-                    ":last-child": { pr: 0 },
-                    "& .MuiStepConnector-root": { top: { xs: 6, sm: 12 } },
-                  }}
-                  key={label}
-                >
-                  <StepLabel
-                    sx={{
-                      ".MuiStepLabel-labelContainer": { maxWidth: "70px" },
-                    }}
-                  >
-                    {label}
-                  </StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            {activeStep === steps.length ? (
-              <Stack spacing={2} useFlexGap>
-                <Typography variant="h1">📦</Typography>
-                <Typography variant="h5">Thank you for your order!</Typography>
-                <Typography variant="body1" sx={{ color: "text.secondary" }}>
-                  Your order number is
-                  <strong>&nbsp;#140396</strong>. We have emailed your order
-                  confirmation and will update you once its shipped.
-                </Typography>
-                <Button
-                  variant="contained"
-                  sx={{ alignSelf: "start", width: { xs: "100%", sm: "auto" } }}
-                >
-                  Go to my orders
-                </Button>
-              </Stack>
+            {answer === null ? (
+              <StepperContent
+                activeStep={activeStep}
+                getMyTrainings={getMyTrainings}
+                form={form}
+                setform={setform}
+                handleBack={handleBack}
+                handleNext={handleNext}
+              />
             ) : (
-              <React.Fragment>
-                {getStepContent(activeStep, form, setform)}
-                <Box
-                  sx={[
-                    {
-                      display: "flex",
-                      flexDirection: { xs: "column-reverse", sm: "row" },
-                      alignItems: "end",
-                      flexGrow: 1,
-                      gap: 1,
-                      pb: { xs: 12, sm: 0 },
-                      mt: { xs: 2, sm: 0 },
-                      mb: "60px",
-                    },
-                    activeStep !== 0
-                      ? { justifyContent: "space-between" }
-                      : { justifyContent: "flex-end" },
-                  ]}
-                >
-                  {activeStep !== 0 && (
-                    <Button
-                      startIcon={<ChevronLeftRoundedIcon />}
-                      onClick={handleBack}
-                      variant="text"
-                      sx={{ display: { xs: "none", sm: "flex" } }}
-                    >
-                      Previous
-                    </Button>
-                  )}
-                  {activeStep !== 0 && (
-                    <Button
-                      startIcon={<ChevronLeftRoundedIcon />}
-                      onClick={handleBack}
-                      variant="outlined"
-                      fullWidth
-                      sx={{ display: { xs: "flex", sm: "none" } }}
-                    >
-                      Previous
-                    </Button>
-                  )}
-                  {activeStep !== steps.length - 1 ? (
-                    <Button
-                      variant="contained"
-                      endIcon={<ChevronRightRoundedIcon />}
-                      onClick={handleNext}
-                      sx={{ width: { xs: "100%", sm: "fit-content" } }}
-                    >
-                      Next
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      onClick={() => {}}
-                      sx={{ width: { xs: "100%", sm: "fit-content" } }}
-                    >
-                      Get your Plan!
-                    </Button>
-                  )}
-                </Box>
-              </React.Fragment>
+              <>
+                {loading && <CircularProgress />}
+                <TrainingPlans
+                  plans={answer.trainings}
+                  clientSessionId={clientSessionId}
+                />
+              </>
             )}
           </Box>
         </Grid>
@@ -296,3 +231,112 @@ export default function Form() {
     </AppTheme>
   );
 }
+
+interface StepperProps {
+  activeStep: number;
+  getMyTrainings: (form: FormType) => void;
+  form: FormType;
+  setform: (form: FormType) => void;
+  handleBack: () => void;
+  handleNext: () => void;
+}
+const StepperContent = ({
+  activeStep,
+  form,
+  setform,
+  handleBack,
+  handleNext,
+  getMyTrainings,
+}: StepperProps) => {
+  return (
+    <>
+      <Stepper
+        id="mobile-stepper"
+        activeStep={activeStep}
+        alternativeLabel
+        sx={{ display: { sm: "flex", md: "none" } }}
+      >
+        {steps.map((label) => (
+          <Step
+            sx={{
+              ":first-child": { pl: 0 },
+              ":last-child": { pr: 0 },
+              "& .MuiStepConnector-root": { top: { xs: 6, sm: 12 } },
+            }}
+            key={label}
+          >
+            <StepLabel
+              sx={{
+                ".MuiStepLabel-labelContainer": { maxWidth: "70px" },
+              }}
+            >
+              {label}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <React.Fragment>
+        {getStepContent(activeStep, form, setform)}
+        <Box
+          sx={[
+            {
+              display: "flex",
+              flexDirection: { xs: "column-reverse", sm: "row" },
+              alignItems: "end",
+              flexGrow: 1,
+              gap: 1,
+              pb: { xs: 12, sm: 0 },
+              mt: { xs: 2, sm: 0 },
+              mb: "60px",
+            },
+            activeStep !== 0
+              ? { justifyContent: "space-between" }
+              : { justifyContent: "flex-end" },
+          ]}
+        >
+          {activeStep !== 0 && (
+            <Button
+              startIcon={<ChevronLeftRoundedIcon />}
+              onClick={handleBack}
+              variant="text"
+              sx={{ display: { xs: "none", sm: "flex" } }}
+            >
+              Previous
+            </Button>
+          )}
+          {activeStep !== 0 && (
+            <Button
+              startIcon={<ChevronLeftRoundedIcon />}
+              onClick={handleBack}
+              variant="outlined"
+              fullWidth
+              sx={{ display: { xs: "flex", sm: "none" } }}
+            >
+              Previous
+            </Button>
+          )}
+          {activeStep !== steps.length - 1 ? (
+            <Button
+              variant="contained"
+              endIcon={<ChevronRightRoundedIcon />}
+              onClick={handleNext}
+              sx={{ width: { xs: "100%", sm: "fit-content" } }}
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={() => {
+                getMyTrainings(form);
+              }}
+              sx={{ width: { xs: "100%", sm: "fit-content" } }}
+            >
+              Get your Plan!
+            </Button>
+          )}
+        </Box>
+      </React.Fragment>
+    </>
+  );
+};

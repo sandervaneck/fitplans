@@ -13,9 +13,10 @@ import { FormType } from "../Form";
 
 interface InfoProps {
   form: FormType;
+  getMyTrainings: (form: FormType) => void;
 }
 
-export default function InfoMobile({ form }: InfoProps) {
+export default function InfoMobile({ form, getMyTrainings }: InfoProps) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -30,7 +31,7 @@ export default function InfoMobile({ form }: InfoProps) {
       >
         <CloseIcon />
       </IconButton>
-      <Info form={form} />
+      <Info form={form} getMyTrainings={getMyTrainings} />
     </Box>
   );
 

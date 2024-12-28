@@ -41,6 +41,11 @@ export default function Home() {
                 Workout plans
               </button>
             </Link>
+            <Link href="/stepper">
+              <button className="px-4 py-2 text-[hsl(0,0%,99%)] bg-[hsl(45,90%,40%)] rounded-md">
+                Tennis plans
+              </button>
+            </Link>
           </div>
         </div>
         <div className="relative mt-10 lg:mt-0">
