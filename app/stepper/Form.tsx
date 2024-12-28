@@ -269,7 +269,7 @@ export default function Form() {
                       Previous
                     </Button>
                   )}
-                  {activeStep !== steps.length - 1 && (
+                  {activeStep !== steps.length - 1 ? (
                     <Button
                       variant="contained"
                       endIcon={<ChevronRightRoundedIcon />}
@@ -277,6 +277,14 @@ export default function Form() {
                       sx={{ width: { xs: "100%", sm: "fit-content" } }}
                     >
                       Next
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      onClick={() => {}}
+                      sx={{ width: { xs: "100%", sm: "fit-content" } }}
+                    >
+                      Get your Plan!
                     </Button>
                   )}
                 </Box>
