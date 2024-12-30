@@ -41,18 +41,6 @@ export default function PaymentForm({ form, setForm }: InfoProps) {
       </FormGrid>
       <FormGrid size={{ xs: 6, md: 12 }}>
         <FormLabel htmlFor="first-name" required>
-          Number of practices a week:
-        </FormLabel>
-        <FormSelect
-          value={String(form.trainings)}
-          options={["1", "2", "3", "4", "5", "6", ">6"]}
-          setValue={(v) => {
-            setForm({ ...form, trainings: Number(v) });
-          }}
-        />
-      </FormGrid>
-      <FormGrid size={{ xs: 6, md: 12 }}>
-        <FormLabel htmlFor="first-name" required>
           Describe your level or rating:
         </FormLabel>
         <FormField

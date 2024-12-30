@@ -7,11 +7,17 @@ export const TrainingOutput = z.object({
       week: z.number(),
       trainings: z.array(
         z.object({
-          day: z.string(),
+          number: z.number(),
           totaltime: z.number(),
           location: z.string(),
           workouttype: z.string(),
-          excercises: z.array(z.string()),
+          excercises: z.array(
+            z.object({
+              title: z.string(),
+              instructions: z.string(),
+            })
+          ),
+          resttime: z.number(),
         })
       ),
     })

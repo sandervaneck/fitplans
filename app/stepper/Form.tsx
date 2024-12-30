@@ -207,7 +207,9 @@ export default function Form() {
               gap: { xs: 5, md: "none" },
             }}
           >
-            {answer === null ? (
+            {loading ? (
+              <CircularProgress />
+            ) : answer === null ? (
               <StepperContent
                 activeStep={activeStep}
                 getMyTrainings={getMyTrainings}
@@ -218,11 +220,13 @@ export default function Form() {
               />
             ) : (
               <>
-                {loading && <CircularProgress />}
                 <TrainingPlans
                   plans={answer.trainings}
                   clientSessionId={clientSessionId}
                 />
+                <Button onClick={() => setAnswer(null)} variant="contained">
+                  Create a new form
+                </Button>
               </>
             )}
           </Box>

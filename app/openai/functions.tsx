@@ -6,7 +6,10 @@ export const getTennisPrompt = (form: FormType): string => {
   Please provide a clear schema for the following sports person:
 Sports: Tennis. Age: ${form.age}. My weight: ${form.weight}. My experience: ${form.experience}. My level: ${form.currentstate}.
 Goal: Improve my ${form.goal} in ${form.plantime} weeks by training ${form.trainings} a week. 
-I need a strength & conditioning plan of ${form.trainings} moments a week with a clear explanation of each exercise for ${form.plantime} weeks. Can you provide this for me?`;
+I need a strength & conditioning plan of ${form.trainings} moments a week with a clear explanation of each exercise for ${form.plantime} weeks. 
+For conditioning and agility, I wanna make use of speed ladder drills, tennis court sprint excercises. 
+For strength, I can make use of a gym and use with resistance bands
+Can you provide this for me?`;
 };
 
 export const getTrainingPrompt = (form: TrainingFormType): string => {

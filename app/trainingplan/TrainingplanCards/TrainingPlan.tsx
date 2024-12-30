@@ -61,7 +61,7 @@ export const TrainingPlan: React.FC<TrainingPlanProps> = ({
 export const returnTileForTraining = (training: TrainingType) => {
   return (
     <>
-      {daytile(training.day)}
+      {daytile(training.number)}
       {/* Meals Row */}
       <div style={{ display: "flex", width: "100%", columnGap: "8px" }}>
         <TrainingRows training={training} />
@@ -70,7 +70,7 @@ export const returnTileForTraining = (training: TrainingType) => {
   );
 };
 
-export const daytile = (day: string) => {
+export const daytile = (number: number) => {
   return (
     <div style={{ margin: "8px 0" }}>
       <span
@@ -83,7 +83,7 @@ export const daytile = (day: string) => {
           borderRadius: "5px",
         }}
       >
-        {day}
+        Training #{number} of the week
       </span>
     </div>
   );
@@ -128,7 +128,10 @@ export const TrainingRows = ({ training }: { training: TrainingType }) => {
         }}
       >
         {training.excercises.map((i, idx) => (
-          <li key={idx}>{i}</li>
+          <li key={idx}>
+            {i.title}: <br />
+            {i.instructions}
+          </li>
         ))}
       </div>
       <hr
@@ -144,6 +147,7 @@ export const TrainingRows = ({ training }: { training: TrainingType }) => {
         }}
       >
         Total Time: {training.totaltime} min <br />
+        Rest Time: {training.resttime} min <br />
         Location: {training.location}
       </div>
       <hr

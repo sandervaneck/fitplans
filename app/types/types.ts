@@ -1,6 +1,7 @@
 export type TrainingScheduleAnswerType = {
   trainings: TrainingsPerWeekType[];
 };
+
 export type MealScheduleAnswerType = {
   meals: MealsPerWeek[];
 };
@@ -30,11 +31,17 @@ export type TrainingsPerWeekType = {
   trainings: TrainingType[];
 };
 export type TrainingType = {
-  day: string;
+  number: number;
   totaltime: number;
   location: string;
   workouttype: string;
-  excercises: string[];
+  excercises: Excercise[];
+  resttime: number;
+};
+
+export type Excercise = {
+  title: string;
+  instructions: string;
 };
 
 export type TrainingFormType = {
