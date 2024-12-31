@@ -1,6 +1,28 @@
 import { FormType } from "../stepper/Form";
 import { MealFormType, TrainingFormType } from "../types/types";
 
+export function getPromptForSport(form: FormType) {
+  switch (form.sport) {
+    case "Tennis":
+      return getTennisPrompt(form);
+    case "Calisthenics":
+      return getCalisthenicsPrompt(form);
+    default:
+      throw new Error("Unknown sport");
+  }
+}
+
+export const getCalisthenicsPrompt = (form: FormType): string => {
+  return `
+  Please provide a clear schema for the following sports person:
+Sports: Calisthenics. Age: ${form.age}. My weight: ${form.weight}. My experience: ${form.experience}. 
+My level: I am able to do ${form.currentstate}.
+Goal: I want to be able to do ${form.goal} in ${form.plantime} weeks by training ${form.trainings} a week. 
+I need a training plan of ${form.trainings} moments a week with a clear explanation of each exercise for ${form.plantime} weeks. 
+I wanna use the least equipment possible. Bars and posts at most. 
+Can you provide this for me?`;
+};
+
 export const getTennisPrompt = (form: FormType): string => {
   return `
   Please provide a clear schema for the following sports person:

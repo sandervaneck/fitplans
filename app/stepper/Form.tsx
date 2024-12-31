@@ -18,7 +18,7 @@ import PaymentForm from "./components/PaymentForm";
 import Review from "./components/Review";
 import Info from "./components/Info";
 import { callTrainingGpt } from "../openai/calls";
-import { getTennisPrompt } from "../openai/functions";
+import { getPromptForSport } from "../openai/functions";
 import { TrainingScheduleAnswerType } from "../types/types";
 import { CircularProgress } from "@mui/material";
 import { TrainingPlans } from "../trainingplan/TrainingplanCards";
@@ -41,7 +41,7 @@ const emptyFormType: FormType = {
   sport: "Tennis",
   currentstate: "Level 3 KNLTB",
   goal: "Endurance",
-  plantime: 8,
+  plantime: 3,
   trainings: 6,
 };
 
@@ -78,7 +78,7 @@ export default function Form() {
   const clientSessionId = crypto.randomUUID();
 
   const getMyTrainings = (form: FormType) => {
-    const prompt = getTennisPrompt(form);
+    const prompt = getPromptForSport(form);
     callTrainingGpt(
       prompt,
       (a: TrainingScheduleAnswerType) => {

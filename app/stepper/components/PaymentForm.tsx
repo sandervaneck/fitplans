@@ -41,7 +41,7 @@ export default function PaymentForm({ form, setForm }: InfoProps) {
       </FormGrid>
       <FormGrid size={{ xs: 6, md: 12 }}>
         <FormLabel htmlFor="first-name" required>
-          Describe your level or rating:
+          Describe your level or {getLevelForSport(form.sport)}:
         </FormLabel>
         <FormField
           value={String(form.currentstate)}
@@ -56,15 +56,7 @@ export default function PaymentForm({ form, setForm }: InfoProps) {
         </FormLabel>
         <FormSelect
           value={form.goal}
-          options={[
-            "Courtspeed",
-            "Serve speed",
-            "Explosive shots",
-            "Feetwork",
-            "Volleys",
-            "Topspin",
-            "Endurance",
-          ]}
+          options={getGoalOptionsForSport(form.sport)}
           setValue={(v) => {
             setForm({ ...form, goal: v });
           }}
@@ -72,4 +64,40 @@ export default function PaymentForm({ form, setForm }: InfoProps) {
       </FormGrid>
     </Grid>
   );
+}
+
+export function getLevelForSport(sport: string) {
+  switch (sport) {
+    case "Tennis":
+      return "Rating";
+    case "Calisthenics":
+      return "Best excercise you are able to do";
+    default:
+      throw new Error("Unknown sport");
+  }
+}
+
+export function getGoalOptionsForSport(sport: string) {
+  switch (sport) {
+    case "Tennis":
+      return [
+        "Courtspeed",
+        "Serve speed",
+        "Explosive shots",
+        "Feetwork",
+        "Volleys",
+        "Topspin",
+        "Endurance",
+      ];
+    case "Calisthenics":
+      return [
+        "Muscle ups",
+        "Front Lever",
+        "Pistol Squat",
+        "Planche",
+        "Pull ups",
+      ];
+    default:
+      throw new Error("Unknown sport");
+  }
 }
